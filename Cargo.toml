@@ -1,0 +1,26 @@
+[package]
+name = "ip-changer"
+version = "1.0.0"
+edition = "2021"
+
+# Cargo 타깃 이름에는 공백을 쓸 수 없어서 ip-changer로 빌드한 뒤
+# build.bat이 "IP Changer.exe"로 복사한다.
+[[bin]]
+name = "ip-changer"
+path = "src/main.rs"
+
+# 실행 파일에 들어가는 외부 크레이트는 없다.
+# 화면은 Windows 기본 Win32 API(user32/gdi32/comctl32)를 직접 호출한다.
+[dependencies]
+
+# 빌드할 때만 쓴다 (아이콘·매니페스트를 exe 리소스로 넣기). exe에는 포함되지 않는다.
+[build-dependencies]
+winres = "0.1"
+
+# 파일 크기를 줄이는 릴리스 설정
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

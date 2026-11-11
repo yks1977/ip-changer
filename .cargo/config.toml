@@ -1,0 +1,4 @@
+# VC++ 런타임(VCRUNTIME140.dll)을 exe 안에 정적으로 넣는다.
+# Visual C++ 재배포 패키지가 없는 PC에서도 exe 하나만으로 실행된다.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

@@ -1,0 +1,4 @@
+/target
+# 빌드 결과물은 GitHub Releases 에 올린다.
+*.exe
+*.pdb
