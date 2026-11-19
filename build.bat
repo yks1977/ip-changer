@@ -24,14 +24,17 @@ if errorlevel 1 (
     exit /b 1
 )
 
+rem In the D:\claude workspace the exe is built into the shared target dir; ask cargo where it is.
+set "TGT=%~dp0target"
+for /f "usebackq delims=" %%T in (`powershell -NoProfile -Command "(cargo metadata --format-version 1 --no-deps --manifest-path '%~dp0Cargo.toml' 2>$null | ConvertFrom-Json).target_directory"`) do set "TGT=%%T"
 echo [2/3] Copying...
-if not exist "%~dp0target\release\ip-changer.exe" (
+if not exist "%TGT%\release\ip-changer.exe" (
     echo [ERROR] ip-changer.exe not found
     pause
     exit /b 1
 )
 
-copy /Y "%~dp0target\release\ip-changer.exe" "%~dp0IP Changer.exe" >nul
+copy /Y "%TGT%\release\ip-changer.exe" "%~dp0IP Changer.exe" >nul
 if errorlevel 1 (
     echo [ERROR] Copy failed
     pause
