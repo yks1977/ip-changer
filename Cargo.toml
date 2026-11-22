@@ -18,9 +18,5 @@ path = "src/main.rs"
 winres = "0.1"
 
 # 파일 크기를 줄이는 릴리스 설정
-[profile.release]
-opt-level = "z"
-lto = true
-codegen-units = 1
-panic = "abort"
-strip = true
+
+# 릴리스 프로필([profile.release])은 워크스페이스 루트 D:\claude\Cargo.toml 에 있다.
